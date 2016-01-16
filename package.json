@@ -1,32 +1,35 @@
 {
-  "name": "hack42",
+  "name": "OpenShift-Sample-App",
   "version": "1.0.0",
-  "description": "hack42 mobil app",
-  "main": "server.js",
-  "dependencies": {
-    "body-parser": "^1.14.1",
-    "express": "^4.13.3",
-    "hat": "^0.0.3",
-    "multer": "^1.1.0",
-    "mysql": "^2.9.0",
-    "password-hash": "^1.2.2",
-    "pg": "4.4.3",
-    "querystring": "^0.2.0",
-    "socket.io": "^1.3.7"
+  "description": "OpenShift Sample Application",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "OpenShift",
+    "email": "ramr@example.org",
+    "url": "http://www.openshift.com/"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "node server.js",
-    "start": "node server.js"
-  },
+  "homepage": "http://www.openshift.com/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gazhrot/Node.JS.git"
+    "url": "https://github.com/openshift/origin-server"
   },
-  "author": "bruneaux axel, daniel romain",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gazhrot/Node.JS/issues"
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
   },
-  "homepage": "https://github.com/gazhrot/Node.JS#readme"
+
+  "dependencies": {
+    "express": "~3.4.4"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
 }

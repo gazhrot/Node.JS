@@ -1,26 +1,41 @@
-var http = require('http');
 var url = require("url");
 
 var querystring = require('querystring');
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var multer = require('multer');
-var hat = require('hat');
-var sha1 = require('password-hash');
-var upload = multer({ dest: 'uploads/' });
 
 var app = express();
 
-//var pg = require('pg');
-
-/*var mysql = require('mysql');
-var connection = mysql.createConnection({
+var http = require('http');
+/*var connection = mysql.createConnection({
 	host	: 'localhost',
 	user 	: 'root',
 	password: '',
-	database: 'hackaton42'
-});*/
+	database: 'hackaton'
+});
+*/
+
+
+
+var mysql = require('mysql');
+
+OPENSHIFT_MYSQL_DB_PORT = 3307;
+
+
+OPENSHIFT_MYSQL_DB_HOST = "meet-taieb.rhcloud.com";
+
+OPENSHIFT_MYSQL_DB_PASSWORD = "jCbutBLzPip7";
+
+OPENSHIFT_MYSQL_DB_USERNAME = "adminWaM4pXn";
+
+var connection = mysql.createConnection({
+  host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
+  port     : process.env.OPENSHIFT_MYSQL_DB_PORT,
+  user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME,
+  password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD,
+  database : 'meet'
+});
 
 app.use(function (req, res, next) {
     // autorise quelle site a envoyer des donné (ici tout le monde)
@@ -45,27 +60,20 @@ res.send('hello world');
 
 })
 
-app.post('/users', function (req, res) {
+app.post('/', function (req, res) {
 	'use strict';
-	if ( req.body.nom && req.body.prenom && req.body.email && req.body.password && req.body.phone) {
-		var aquery = connection.query('SELECT * FROM users WHERE email = ?', req.body.email, function (err, rows) {
-			if (err) {
-				console.log('fail to find users');
-			} else {
-				if (rows.length < 1) {
-					var query = connection.query('INSERT INTO users (nom, prenom, email, password, phone) VALUES (?, ?, ?, ?, ?)', [req.body.nom, req.body.prenom, req.body.email, req.body.password, req.body.phone], function (err, rows) {
-						if (err) {
-							console.log(err);
-						} else {
-							res.send({error: false, data: []});
-						}
-					});
-				} else {
-					res.send({error: 'Email déjà utilisée.', data: []});
-				}
-			}
-		});
-	}
+	res.send(req.latitude);
+	res.send(req.longitude);
+
+	var query = connection.query('INSERT INTO marker (latitude, longitude) VALUES (?, ?)', [req.body.latitude, req.body.longitude], function (err, rows) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send({error: false, data: []});
+		}
+	})
 })
 
-app.listen(3000);
+var port = process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || 8080;  
+var ipaddr = process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost';  
+app.listen(port, ipaddr);
