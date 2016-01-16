@@ -12,13 +12,15 @@ var upload = multer({ dest: 'uploads/' });
 
 var app = express();
 
-var mysql = require('mysql');
+//var pg = require('pg');
+
+/*var mysql = require('mysql');
 var connection = mysql.createConnection({
 	host	: 'localhost',
 	user 	: 'root',
 	password: '',
 	database: 'hackaton42'
-});
+});*/
 
 app.use(function (req, res, next) {
     // autorise quelle site a envoyer des donné (ici tout le monde)
