@@ -20,14 +20,14 @@ var http = require('http');
 
 var mysql = require('mysql');
 
-OPENSHIFT_MYSQL_DB_PORT = 3307;
+OPENSHIFT_MYSQL_DB_PORT = ;
 
 
-OPENSHIFT_MYSQL_DB_HOST = "meet-taieb.rhcloud.com";
+OPENSHIFT_MYSQL_DB_HOST = "";
 
-OPENSHIFT_MYSQL_DB_PASSWORD = "jCbutBLzPip7";
+OPENSHIFT_MYSQL_DB_PASSWORD = "";
 
-OPENSHIFT_MYSQL_DB_USERNAME = "adminWaM4pXn";
+OPENSHIFT_MYSQL_DB_USERNAME = "";
 
 var connection = mysql.createConnection({
   host     : process.env.OPENSHIFT_MYSQL_DB_HOST,
